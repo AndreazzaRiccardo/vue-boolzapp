@@ -184,17 +184,9 @@
     }
 
     .chat-box {
-        padding: 2rem 2rem;
+        padding: 2rem .5rem;
     }
-
-    .sent {
-        width: 90%;
-    }
-
-    .received {
-        width: 90%;
-    }
-
+    
     .btn-header-right {
         display: none;
     }

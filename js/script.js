@@ -176,7 +176,6 @@ createApp({
         return {
             contacts,
             selectIndex: 0,
-            lastAccess: contacts[0].messages[0].date,
             newMessage: "",
             dataNow,
             searchText: ""
@@ -185,21 +184,21 @@ createApp({
     created() {
     },
     methods: {
+
+        // Legge sempre l'ultimo valore di un array
         readLastValueMessage(array) {
             const lengthArray = (array.messages).length;
             return array.messages[lengthArray - 1];
         },
 
+        // Cmabia elementi in pagina in base alla chat selezionata
         showAllChat(array, index) {
             this.selectIndex = index;
             const lengthMessages = (array.messages).length;
             this.lastAccess = contacts[this.selectIndex].messages[lengthMessages - 1].date;
         },
 
-        readMessageValue(array) {
-            return array.messages;
-        },
-
+        // Determina se il messaggio è di tipo inviato o ricevuto
         itSendOrReceived(message) {
             if(message.status === 'sent'){
                 return 'sent';
@@ -208,6 +207,7 @@ createApp({
             }
         },
 
+        // Invia un messaggio
         sendMessage(array) {
             let tempMessage = {
                 date: this.dataNow,
@@ -219,6 +219,7 @@ createApp({
             setTimeout(() => this.receivedMess(array), 2000);
         },
 
+        // Ricevi un messaggio autogenerato
         receivedMess(array) {
             let tempMessage = {
                 date: this.dataNow,
@@ -228,14 +229,20 @@ createApp({
             array.push(tempMessage);
         },
 
+        // Mostra solo ore e minuti
         onlyHour(array) {
             return array.slice(-8, -3);
         },
 
-        clearMessage(array, index) {
-            return array.splice(index, 1);
+        // Cancella un elemento di un'array
+        clearMessage(array, index, startArray) {
+            array.splice(index, 1);
+            if(array.length === 0) {
+                startArray.splice(this.selectIndex, 1)
+            }
         },
 
+        // Avvia una ricerca nella searchbar
         searchUser() {
             let search = this.searchText.toLowerCase();
             this.contacts.forEach(elem => {

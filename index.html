@@ -113,7 +113,7 @@
                         <img :src="`img/avatar${contacts[selectIndex].avatar}.jpg`" alt="Michele">
                         <div>
                             <h3>{{ contacts[selectIndex].name }}</h3>
-                            <p>Ultimo accesso: {{ lastAccess }}</p>
+                            <p>Ultimo accesso: {{ readLastValueMessage(contacts[0]).date }}</p>
                         </div>
                     </div>
 
@@ -149,7 +149,7 @@
                                                 <button>
                                                     Info messaggio
                                                 </button>
-                                                <button @click="clearMessage(friends.messages, j)">
+                                                <button @click="clearMessage(friends.messages, j, contacts)">
                                                     Cancella messaggio
                                                 </button>
                                             </div>
