@@ -183,11 +183,8 @@
         .chat-card {
             width: 299px;
             height: 48px;
-            align-self: flex-start;
             display: flex;
-            flex-grow: 1;
-            justify-content: space-between;
-            overflow:hidden;
+            flex-direction: column;
         }
 
         .chat-card p {

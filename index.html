@@ -80,155 +80,21 @@
                     <!-- Contact list -->
                     <ul>
 
-                        <li class="card">
+                        <li class="card"  v-for="(friend, index) in contacts">
 
                             <div class="img-chat">
-                                <img src="img/avatar_1.jpg" alt="">
+                                <img :src="`img/avatar${friend.avatar}.jpg`" alt="">
                             </div>
                             <div class="chat-card">
                                 <div>
-                                    <h3>Michele</h3>
-                                    <p>Lorem ipsum dolor sit amet</p>
+                                    <h3>{{ friend.name }}</h3>
+                                    <p>{{ readValueLastMessage(friend).message }}</p>
                                 </div>
-                                <p>16:15</p>
+                                <p>{{ readValueLastMessage(friend).date }}</p>
                             </div>
 
                         </li>
 
-                        <li class="card">
-
-                            <div class="img-chat">
-                                <img src="img/avatar_2.jpg" alt="">
-                            </div>
-                            <div class="chat-card">
-                                <div>
-                                    <h3>Fabio</h3>
-                                    <p>Lorem ipsum dolor sit amet</p>
-                                </div>
-                                <p>16:05</p>
-                            </div>
-
-                        </li>
-
-                        <li class="card">
-
-                            <div class="img-chat">
-                                <img src="img/avatar_3.jpg" alt="">
-                            </div>
-                            <div class="chat-card">
-                                <div>
-                                    <h3>Samuele</h3>
-                                    <p>Lorem ipsum dolor sit amet</p>
-                                </div>
-                                <p>16:03</p>
-                            </div>
-
-                        </li>
-
-                        <li class="card">
-
-                            <div class="img-chat">
-                                <img src="img/avatar_4.jpg" alt="">
-                            </div>
-                            <div class="chat-card">
-                                <div>
-                                    <h3>Alessandro B.</h3>
-                                    <p>Lorem ipsum dolor sit amet</p>
-                                </div>
-                                <p>15:50</p>
-                            </div>
-
-                        </li>
-
-                        <li class="card">
-
-                            <div class="img-chat">
-                                <img src="img/avatar_5.jpg" alt="">
-                            </div>
-                            <div class="chat-card">
-                                <div>
-                                    <h3>Alessandro L.</h3>
-                                    <p>Lorem ipsum dolor sit amet</p>
-                                </div>
-                                <p>15:45</p>
-                            </div>
-
-                        </li>
-
-                        <li class="card">
-
-                            <div class="img-chat">
-                                <img src="img/avatar_6.jpg" alt="">
-                            </div>
-                            <div class="chat-card">
-                                <div>
-                                    <h3>Claudia</h3>
-                                    <p>Lorem ipsum dolor sit amet</p>
-                                </div>
-                                <p>15:40</p>
-                            </div>
-
-                        </li>
-
-                        <li class="card">
-
-                            <div class="img-chat">
-                                <img src="img/avatar_7.jpg" alt="">
-                            </div>
-                            <div class="chat-card">
-                                <div>
-                                    <h3>Federico</h3>
-                                    <p>Lorem ipsum dolor sit amet</p>
-                                </div>
-                                <p>15:22</p>
-                            </div>
-
-                        </li>
-
-                        <li class="card">
-
-                            <div class="img-chat">
-                                <img src="img/avatar_8.jpg" alt="">
-                            </div>
-                            <div class="chat-card">
-                                <div>
-                                    <h3>Davide</h3>
-                                    <p>Lorem ipsum dolor sit amet</p>
-                                </div>
-                                <p>15:15</p>
-                            </div>
-
-                        </li>
-
-                        <li class="card">
-
-                            <div class="img-chat">
-                                <img src="img/avatar_3.jpg" alt="">
-                            </div>
-                            <div class="chat-card">
-                                <div>
-                                    <h3>Davide</h3>
-                                    <p>Lorem ipsum dolor sit amet</p>
-                                </div>
-                                <p>15:15</p>
-                            </div>
-
-                        </li>
-
-                        <li class="card">
-
-                            <div class="img-chat">
-                                <img src="img/avatar_4.jpg" alt="">
-                            </div>
-                            <div class="chat-card">
-                                <div>
-                                    <h3>Davide</h3>
-                                    <p>Lorem ipsum dolor sit amet</p>
-                                </div>
-                                <p>15:15</p>
-                            </div>
-
-                        </li>
 
                     </ul>
                     <!-- /Contact list -->
