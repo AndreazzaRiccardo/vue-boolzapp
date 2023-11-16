@@ -181,8 +181,6 @@ createApp({
             searchText: ""
         }
     },
-    created() {
-    },
     methods: {
 
         // Legge sempre l'ultimo valore di un array
@@ -196,15 +194,6 @@ createApp({
             this.selectIndex = index;
             const lengthMessages = (array.messages).length;
             this.lastAccess = contacts[this.selectIndex].messages[lengthMessages - 1].date;
-        },
-
-        // Determina se il messaggio è di tipo inviato o ricevuto
-        itSendOrReceived(message) {
-            if(message.status === 'sent'){
-                return 'sent';
-            } else {
-                return 'received';
-            }
         },
 
         // Invia un messaggio
@@ -238,7 +227,7 @@ createApp({
         clearMessage(array, index, startArray) {
             array.splice(index, 1);
             if(array.length === 0) {
-                startArray.splice(this.selectIndex, 1)
+                startArray.splice(this.selectIndex, 1);
             }
         },
 

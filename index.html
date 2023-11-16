@@ -113,7 +113,7 @@
                         <img :src="`img/avatar${contacts[selectIndex].avatar}.jpg`" alt="Michele">
                         <div>
                             <h3>{{ contacts[selectIndex].name }}</h3>
-                            <p>Ultimo accesso: {{ readLastValueMessage(contacts[0]).date }}</p>
+                            <p>Ultimo accesso: {{ readLastValueMessage(contacts[selectIndex]).date }}</p>
                         </div>
                     </div>
 
@@ -135,9 +135,9 @@
 
                     <!-- Chat box -->
                     <div class="chat-box" >
-                        <div class="message-container" v-for="(friends, i) in contacts" :key="i" v-show="i === selectIndex">
+                        <div class="message-container" v-for="(object, i) in contacts" :key="i" v-show="i === selectIndex">
 
-                            <div :class="itSendOrReceived(friend)" v-for="(friend, j) in friends.messages" :key="j">
+                            <div :class="friend.status === 'received' ? 'received' : 'sent'" v-for="(friend, j) in object.messages" :key="j">
                                 <div class="message">
                                     <div class="text-message">
                                         <p>{{ friend.message }}</p>
@@ -145,11 +145,11 @@
                                     <div class="menu-message">
                                         <div class="trigger">
                                             <i class="fa-solid fa-angle-down"></i>
-                                            <div class="message-option" :class="itSendOrReceived(friend)">
+                                            <div class="message-option" :class="friend.status === 'received' ? 'received' : 'sent'">
                                                 <button>
                                                     Info messaggio
                                                 </button>
-                                                <button @click="clearMessage(friends.messages, j, contacts)">
+                                                <button @click="clearMessage(object.messages, j, contacts)">
                                                     Cancella messaggio
                                                 </button>
                                             </div>
@@ -161,7 +161,6 @@
 
                         </div>
                     </div>
-
                     <!-- /Chat box -->
 
                     <!-- Message input -->
