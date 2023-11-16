@@ -80,17 +80,17 @@
                     <!-- Contact list -->
                     <ul>
 
-                        <li class="card"  v-for="(friend, index) in contacts">
+                        <li class="card"  v-for="(object, index) in contacts" @click="showAllChat(object, index)">
 
                             <div class="img-chat">
-                                <img :src="`img/avatar${friend.avatar}.jpg`" alt="">
+                                <img :src="`img/avatar${object.avatar}.jpg`" alt="">
                             </div>
                             <div class="chat-card">
                                 <div>
-                                    <h3>{{ friend.name }}</h3>
-                                    <p>{{ readValueLastMessage(friend).message }}</p>
+                                    <h3>{{ object.name }}</h3>
+                                    <p  class="last-message">{{ readLastValueMessage(object).message }}</p>
                                 </div>
-                                <p>{{ readValueLastMessage(friend).date }}</p>
+                                <p>{{ readLastValueMessage(object).date }}</p>
                             </div>
 
                         </li>
@@ -110,10 +110,10 @@
                 <header class="right-header card">
 
                     <div class="last-access">
-                        <img src="img/avatar_1.jpg" alt="Michele">
+                        <img :src="`img/avatar${contacts[selectIndex].avatar}.jpg`" alt="Michele">
                         <div>
-                            <h3>Michele</h3>
-                            <p>Ultimo accesso oggi alle 16:26</p>
+                            <h3>{{ contacts[selectIndex].name }}</h3>
+                            <p>Ultimo accesso: {{ lastAccess }}</p>
                         </div>
                     </div>
 
@@ -134,145 +134,34 @@
                 <main>
 
                     <!-- Chat box -->
-                    <div class="chat-box">
+                    <div class="chat-box" v-for="(friends, i) in contacts" v-show="!friends.visible" :key="i">
+                        <div class="message-container" v-for="(friend, j) in friends.messages" :key="j">
 
-                        <div class="sent">
-                            <div class="message">
-                                <div class="text-message">
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam architecto optio consequuntur ullam dolor modi deserunt officia fuga sint delectus eius placeat, qui culpa, temporibus id doloribus eum nisi ea?
-                                    Repellendus magnam ratione quis ex?Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum voluptatum molestias quidem delectus enim suscipit. Dolor fuga ducimus veniam tenetur corrupti voluptatum rerum, fugiat laudantium optio dicta repudiandae quae velit? </p>
-                                </div>
-                                <div class="menu-message">
-                                    <div class="trigger">
-                                        <i class="fa-solid fa-angle-down"></i>
-                                        <div class="message-option">
-                                            <button>
-                                                Info messaggio
-                                            </button>
-                                            <button>
-                                                Cancella messaggio
-                                            </button>
-                                        </div>
+                            <div :class="itSendOrReceived(friend)" >
+                                <div class="message">
+                                    <div class="text-message">
+                                        <p>{{ friend.message }}</p>
                                     </div>
-                                    <p>16:13</p>
+                                    <div class="menu-message">
+                                        <div class="trigger">
+                                            <i class="fa-solid fa-angle-down"></i>
+                                            <div class="message-option" :class="itSendOrReceived(friend)">
+                                                <button>
+                                                    Info messaggio
+                                                </button>
+                                                <button @click="clearMessage(friends.messages, j)">
+                                                    Cancella messaggio
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p>{{ onlyHour(friend.date) }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="sent">
-                            <div class="message">
-                                <div class="text-message">
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam architecto optio consequuntur ullam dolor modi deserunt officia fuga sint delectus eius placeat, qui culpa, temporibus id doloribus eum nisi ea?
-                                    </p>
-                                </div>
-                                <div class="menu-message">
-                                    <div class="trigger">
-                                        <i class="fa-solid fa-angle-down"></i>
-                                        <div class="message-option">
-                                            <button>
-                                                Info messaggio
-                                            </button>
-                                            <button>
-                                                Cancella messaggio
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <p>16:13</p>
-                                </div>
-                            </div>
                         </div>
-
-                        <div class="received">
-                            <div class="message">
-                                <div class="text-message">
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam architecto optio consequuntur ullam dolor modi deserunt officia fuga sint delectus eius placeat, qui culpa, temporibus id doloribus eum nisi ea?
-                                    Repellendus magnam ratione quis ex?</p>
-                                </div>
-                                <div class="menu-message">
-                                    <div class="trigger">
-                                        <i class="fa-solid fa-angle-down"></i>
-                                        <div class="message-option">
-                                            <button>
-                                                Info messaggio
-                                            </button>
-                                            <button>
-                                                Cancella messaggio
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <p>16:13</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sent">
-                            <div class="message">
-                                <div class="text-message">
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                </div>
-                                <div class="menu-message">
-                                    <div class="trigger">
-                                        <i class="fa-solid fa-angle-down"></i>
-                                        <div class="message-option">
-                                            <button>
-                                                Info messaggio
-                                            </button>
-                                            <button>
-                                                Cancella messaggio
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <p>16:13</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="received">
-                            <div class="message">
-                                <div class="text-message">
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam architecto optio consequuntur ullam dolor modi deserunt officia fuga sint delectus eius placeat, qui culpa, temporibus id doloribus eum nisi ea?
-                                    Repellendus magnam ratione quis ex?Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eos ipsum quia omnis ad minus. Ullam voluptatem minus rem labore tenetur repellat dicta quod, sit provident facilis, maxime similique ipsa. </p>
-                                </div>
-                                <div class="menu-message">
-                                    <div class="trigger">
-                                        <i class="fa-solid fa-angle-down"></i>
-                                        <div class="message-option">
-                                            <button>
-                                                Info messaggio
-                                            </button>
-                                            <button>
-                                                Cancella messaggio
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <p>16:13</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sent">
-                            <div class="message">
-                                <div class="text-message">
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, facilis? Perspiciatis, repellat facere, quis recusandae hic ullam vero doloremque a eveniet vel cumque quos similique vitae culpa non ipsa ut.</p>
-                                </div>
-                                <div class="menu-message">
-                                    <div class="trigger">
-                                        <i class="fa-solid fa-angle-down"></i>
-                                        <div class="message-option">
-                                            <button>
-                                                Info messaggio
-                                            </button>
-                                            <button>
-                                                Cancella messaggio
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <p>16:13</p>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
+
                     <!-- /Chat box -->
 
                     <!-- Message input -->
@@ -282,7 +171,7 @@
                             <i class="fa-regular fa-face-smile"></i>
                         </button>
                         <label for="input-text-message" class="text-send">
-                            <input id="input-text-message" type="text" placeholder="Scrivi un messaggio">
+                            <input id="input-text-message" type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage(contacts[selectIndex].messages)">
                         </label>
                         <button class="microphone">
                             <i class="fa-solid fa-microphone"></i>
@@ -302,6 +191,10 @@
     </div>
     <!-- /Wrapper -->
 
+    <!-- Luxon -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.4/luxon.min.js" integrity="sha512-dUlSLLkxslGILhPdCkALwk4szPhp3xmZIKFtlUD+O9Lslq41Aksmdt5OGqpomDoT4FsCUH70jQU8ezZHI3v1RQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- My script -->
     <script src="./js/script.js"></script>
 </body>
 </html>

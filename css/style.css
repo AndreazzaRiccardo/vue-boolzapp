@@ -191,6 +191,13 @@
             color: var(--btn-color);
         }
 
+        .last-message {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 300px;
+        }
+
 
 /* RIGHT BOX */
 
@@ -228,11 +235,15 @@
         .chat-box {
             height:calc(100% - 110px);
             background-image: url(../img/mine.jpg);
+            overflow-y: scroll;
+        }
+
+        .message-container {
             padding: 2rem 3rem;
             display: flex;
             flex-direction: column;
             align-items: start;
-            overflow-y: scroll;
+            width: 100%;
         }
 
         .message-input {
@@ -313,13 +324,21 @@
 
         .message-option {
             box-shadow: 0px 0px 6px black;
-            background-color: white;
             position: absolute;
             flex-direction: column;
             min-width: 170px;
-            right: 10%;
             top: 90%;
             display: none;
+            border-radius: 0;
+            padding: 0;
+        }
+
+        .message-option.sent {
+            right: 10%;
+        }
+
+        .message-option.received {
+            left: 10%;
         }
 
         .trigger {
