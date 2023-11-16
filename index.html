@@ -70,7 +70,7 @@
                         <label for="search-bar" class="search-icon">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </label>
-                        <input id="search-bar" type="search" placeholder="Cerca o inizia una nuova chat">
+                        <input id="search-bar" type="search" placeholder="Cerca o inizia una nuova chat" v-model="searchText" @keyup="searchUser">
                     </div>
 
                 </header>
@@ -80,7 +80,7 @@
                     <!-- Contact list -->
                     <ul>
 
-                        <li class="card"  v-for="(object, index) in contacts" @click="showAllChat(object, index)">
+                        <li class="card"  v-for="(object, index) in contacts" @click="showAllChat(object, index)" v-show="object.visible">
 
                             <div class="img-chat">
                                 <img :src="`img/avatar${object.avatar}.jpg`" alt="">
@@ -134,10 +134,10 @@
                 <main>
 
                     <!-- Chat box -->
-                    <div class="chat-box" v-for="(friends, i) in contacts" v-show="!friends.visible" :key="i">
-                        <div class="message-container" v-for="(friend, j) in friends.messages" :key="j">
+                    <div class="chat-box" >
+                        <div class="message-container" v-for="(friends, i) in contacts" :key="i" v-show="i === selectIndex">
 
-                            <div :class="itSendOrReceived(friend)" >
+                            <div :class="itSendOrReceived(friend)" v-for="(friend, j) in friends.messages" :key="j">
                                 <div class="message">
                                     <div class="text-message">
                                         <p>{{ friend.message }}</p>

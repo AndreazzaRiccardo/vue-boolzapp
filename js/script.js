@@ -10,7 +10,7 @@ let contacts = [
     {
     name: 'Michele',
     avatar: '_1',
-    visible: false,
+    visible: true,
     messages: [
         {
         date: '10/01/2020, 15:30:55',
@@ -179,6 +179,7 @@ createApp({
             lastAccess: contacts[0].messages[0].date,
             newMessage: "",
             dataNow,
+            searchText: ""
         }
     },
     created() {
@@ -189,16 +190,8 @@ createApp({
             return array.messages[lengthArray - 1];
         },
 
-        ciao(array) {
-            return array.length - 1
-        },
-
         showAllChat(array, index) {
-            contacts.forEach(element => {
-                element.visible = true;
-            });
-            array.visible = false;
-            this.selectIndex = index
+            this.selectIndex = index;
             const lengthMessages = (array.messages).length;
             this.lastAccess = contacts[this.selectIndex].messages[lengthMessages - 1].date;
         },
@@ -209,9 +202,9 @@ createApp({
 
         itSendOrReceived(message) {
             if(message.status === 'sent'){
-                return 'sent'
+                return 'sent';
             } else {
-                return 'received'
+                return 'received';
             }
         },
 
@@ -223,7 +216,7 @@ createApp({
             };
             array.push(tempMessage);
             this.newMessage = "";
-            setTimeout(() => this.receivedMess(array), 2000)
+            setTimeout(() => this.receivedMess(array), 2000);
         },
 
         receivedMess(array) {
@@ -236,11 +229,20 @@ createApp({
         },
 
         onlyHour(array) {
-            return array.slice(-8, -3)
+            return array.slice(-8, -3);
         },
 
         clearMessage(array, index) {
-            return array.splice(index, 1)
+            return array.splice(index, 1);
+        },
+
+        searchUser() {
+            let search = this.searchText.toLowerCase();
+            this.contacts.forEach(elem => {
+                elem.visible = false;
+                if(elem.name.toLowerCase().includes(search))
+                elem.visible = true;
+            })
         }
     }
-}).mount("#wrapper")
+}).mount("#wrapper");
