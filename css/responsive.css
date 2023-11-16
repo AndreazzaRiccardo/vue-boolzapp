@@ -1,0 +1,209 @@
+/* DARK MODE MEDIAQUERY */
+
+@media (prefers-color-scheme: dark) {
+
+    /* COMMON */
+
+    :root {
+        --dark-grey :rgb(49, 55, 61);
+        --light-grey:rgb(81, 90, 100);
+    }
+
+    #wrapper {
+        background: linear-gradient(rgba(0, 0, 0, 0.829) 15%, rgba(0, 0, 0, 0.736) 15%);
+    }
+
+    header {
+        background-color: var(--dark-grey);
+        color: white;
+    }
+
+    /* LEFT BOX */
+
+    .left-box {
+        background-color: var(--light-grey);
+    }
+
+    li {
+        background-color:var(--dark-grey);
+        color: white;
+    }
+
+    .notice {
+        background-color: var(--light-grey);
+    }
+
+    .notice a {
+        color: rgb(164, 177, 191);
+    }
+
+    ul::-webkit-scrollbar {
+        background-color: var(--light-grey);
+    }
+
+    ul::-webkit-scrollbar-thumb {
+        background-color: var(--dark-grey);
+        border: 1px solid var(--light-grey);
+    }
+
+    /* RIGHT BOX */
+
+    .message-input {
+        background-color: var(--light-grey);
+    }
+
+    .chat-box {
+        background-image: url(../img/Dark.jpg);
+    }
+
+    .received {
+        background-color: var(--dark-grey);
+        color: white;
+    }
+
+    .sent {
+        color: white;
+        background-color: #085E55;
+    }
+
+    .message-option {
+        background-color: var(--light-grey);
+    }
+
+    .message-option button {
+        color: white;
+    }
+
+    .chat-box::-webkit-scrollbar {
+        background-color:var(--light-grey)
+    }
+
+    .chat-box::-webkit-scrollbar-thumb {
+        background-color: var(--dark-grey);
+        border: 1px solid var(--light-grey);
+    }
+}
+
+
+/* MEDIAQUERY FOR TABLET */
+
+@media screen and (max-width:1230px) {
+
+    /* COMMON */
+
+    .container {
+        height: 100vh;
+        width: 100%;
+    }
+
+    /* LEFT BOX */
+
+    .left-box {
+        height: 100%;
+        width: auto;
+        flex-shrink: 0;
+    }
+
+    .left-box main {
+        height:calc(100% - 118px);
+    }
+
+    .avatar-img h1 {
+        display: none;
+    }
+
+    .notice {
+        display: none;
+    }
+
+    .search {
+        display: none;
+    }
+
+    .avatar-btn {
+        display: none;
+    }
+
+    .left-box header {
+        height: 118px;
+    }
+
+    .chat-card {
+        display: none;
+    }
+
+    ul::-webkit-scrollbar {
+        width: 0;
+    }
+
+    /* RIGHT BOX */
+
+    .right-box {
+        width: 100%;
+    }
+
+    .chat-box::-webkit-scrollbar{
+        width: 0;
+    }
+
+    .right-box main {
+        height:calc(100% - 118px);
+    }
+}
+
+
+/* MEDIAQUERY FOR MOBILE */
+
+@media screen and (max-width:670px) {
+
+    /* LEFT BOX */
+
+    .left-box {
+        display: none;
+    }
+
+    /* RIGHT BOX */
+
+    .right-box {
+        height: 100vh;
+        width: 100%;
+    }
+
+    .message-input button {
+        display: none;
+    }
+
+    .right-header {
+        height: 118px;
+        font-size: 0.8rem;
+        line-height: 0;
+    }
+
+    .right-box main {
+        height:calc(100% - 118px);
+    }
+
+    .chat-box {
+        padding: 2rem 2rem;
+    }
+
+    .sent {
+        width: 90%;
+    }
+
+    .received {
+        width: 90%;
+    }
+
+    .btn-header-right {
+        display: none;
+    }
+
+    .text-send input {
+        font-size: 1rem;
+    }
+
+    .last-access div {
+        margin-top: 1rem;
+    }
+}
