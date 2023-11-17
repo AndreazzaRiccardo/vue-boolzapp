@@ -165,7 +165,6 @@ let contacts = [
     }
 ];
 
-
 createApp({
     data () {
         return {
@@ -216,6 +215,7 @@ createApp({
                 status: 'received'
             };
             array.push(tempMessage);
+            this.clearIsWriting()
             this.audioReceived();
             this.refreshLastAccess();
         },
@@ -258,8 +258,15 @@ createApp({
                 message: "Sta scrivendo...",
                 status: 'received'
             };
-            array.push(tempMessage);
-            setTimeout(() => this.contacts[this.selectIndex].messages.pop(), 3000);
+            let includes = false
+            this.contacts[this.selectIndex].messages.forEach(elem => {
+                if(elem.message.includes("Sta scrivendo...")) {
+                    includes = true
+                } 
+            })
+            if(includes === false){
+                array.push(tempMessage)
+            }        
         },
 
         // Audio di messaggio ricevuto
@@ -283,6 +290,15 @@ createApp({
         refreshLastAccess() {
             this.contacts.forEach(elem => {
                 localStorage.setItem(elem.name, elem.messages[elem.messages.length - 1].date);
+            })
+        },
+
+        // Evita la creazione di messaggi d'attesa multipli
+        clearIsWriting() {
+            this.contacts[this.selectIndex].messages.forEach((elem, i) => {
+                if(elem.message === "Sta scrivendo...") {
+                    this.contacts[this.selectIndex].messages.splice(i, 1);
+                }
             })
         }
     }
