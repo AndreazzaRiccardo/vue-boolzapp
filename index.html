@@ -80,7 +80,7 @@
                     <!-- Contact list -->
                     <ul>
 
-                        <li class="card"  v-for="(object, index) in contacts" @click="showAllChat(object, index)" :key="object.name" v-show="object.visible">
+                        <li class="card"  v-for="(object, index) in contacts" @click="showThisChat(index)" :key="object.name" v-show="object.visible">
 
                             <div class="img-chat">
                                 <img :src="`img/avatar${object.avatar}.jpg`" :alt="`Avatar ${object.name}`">
@@ -88,9 +88,11 @@
                             <div class="chat-card">
                                 <div>
                                     <h3>{{ object.name }}</h3>
-                                    <p  class="last-message">{{ readLastValueMessage(object).message }}</p>
+                                    <p  v-if="object.messages.length !== 0" class="last-message">{{ readLastValueMessage(object).message }}</p>
+                                    <p v-else></p>
                                 </div>
-                                <p>{{ readLastValueMessage(object).date }}</p>
+                                <p v-if="object.messages.length !== 0">{{ readLastValueMessage(object).date }}</p>
+                                <p v-else></p>
                             </div>
 
                         </li>
@@ -112,7 +114,8 @@
                         <img :src="`img/avatar${contacts[selectIndex].avatar}.jpg`" :alt="`Avatar ${contacts[selectIndex].name}` ">
                         <div>
                             <h3>{{ contacts[selectIndex].name }}</h3>
-                            <p>Ultimo accesso: {{ readLastValueMessage(contacts[selectIndex]).date }}</p>
+                            <p v-if="contacts[selectIndex].messages.length !== 0">Ultimo accesso: {{ readLastValueMessage(contacts[selectIndex]).date }}</p>
+                            <p v-else></p>
                         </div>
                     </div>
 
@@ -133,10 +136,10 @@
                 <main>
 
                     <!-- Chat box -->
-                    <div class="chat-box" >
-                        <div class="message-container" v-for="(messagesUser, index) in contacts[selectIndex].messages">
+                    <div class="chat-box">
+                        <div class="message-container" v-for="(messagesUser, index) in contacts[selectIndex].messages" :key="messagesUser.date">
                       
-                                <div class="message" :class="messagesUser.status === 'received' ? 'received' : 'sent'">
+                                <div class="message"  :class="messagesUser.status === 'received' ? 'received' : 'sent'">
                                     <div class="text-message">
                                         <p>{{ messagesUser.message }}</p>
                                     </div>
@@ -169,8 +172,11 @@
                         <label for="input-text-message" class="text-send">
                             <input id="input-text-message" type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage(contacts[selectIndex].messages)">
                         </label>
-                        <button class="microphone">
+                        <button class="microphone" v-if="newMessage === ''">
                             <i class="fa-solid fa-microphone"></i>
+                        </button>
+                        <button v-else class="send" @click="sendMessage(contacts[selectIndex].messages)">
+                            <i class="fa-regular fa-paper-plane"></i>
                         </button>
 
                     </div>

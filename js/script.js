@@ -190,29 +190,30 @@ createApp({
         },
 
         // Cmabia elementi in pagina in base alla chat selezionata
-        showAllChat(array, index) {
+        showThisChat(index) {
             this.selectIndex = index;
-            const lengthMessages = (array.messages).length;
-            this.lastAccess = contacts[this.selectIndex].messages[lengthMessages - 1].date;
         },
 
         // Invia un messaggio
         sendMessage(array) {
             let tempMessage = {
                 date: this.dataNow,
-                message: this.newMessage,
+                message: this.newMessage.trim(),
                 status: 'sent'
             };
+            if(tempMessage.message !== ""){
             array.push(tempMessage);
-            this.newMessage = "";
             setTimeout(() => this.receivedMess(array), 2000);
+            }
+            this.newMessage = "";
         },
 
         // Ricevi un messaggio autogenerato
         receivedMess(array) {
+            let answers = ["va bene", "a domani", "ne parliamo dopo", "ok", "sto arrivando"];
             let tempMessage = {
                 date: this.dataNow,
-                message: "ok",
+                message: answers[this.generateRndNumber(5)],
                 status: 'received'
             };
             array.push(tempMessage);
@@ -226,9 +227,6 @@ createApp({
         // Cancella un elemento di un'array
         clearMessage(array, index) {
             array.splice(index, 1);
-            if(array.length === 0) {
-                this.contacts.splice(this.selectIndex, 1);
-            }
         },
 
         // Avvia una ricerca nella searchbar
@@ -239,6 +237,9 @@ createApp({
                 if(elem.name.toLowerCase().includes(search))
                 elem.visible = true;
             })
-        }
+        },
+        generateRndNumber(max) {
+            return Math.floor(Math.random() * max)
+        },
     }
 }).mount("#wrapper");

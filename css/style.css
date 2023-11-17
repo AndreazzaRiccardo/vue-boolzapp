@@ -185,6 +185,7 @@
             height: 48px;
             display: flex;
             flex-direction: column;
+            justify-content: start;
         }
 
         .chat-card p {
@@ -358,6 +359,16 @@
             height: 80px;
             border-radius: 50%;
             aspect-ratio: 1/1;
+        }
+
+        .send {
+            width: 80px;
+            height: 80px;
+            aspect-ratio: 1/1;
+        }
+
+        .send:hover {
+            color: var(--light-blue);
         }
 
         .microphone:active {
