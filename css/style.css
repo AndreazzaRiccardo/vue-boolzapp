@@ -185,7 +185,10 @@
             height: 48px;
             display: flex;
             flex-direction: column;
-            justify-content: start;
+        }
+
+        .empty {
+            justify-content: end;
         }
 
         .chat-card p {

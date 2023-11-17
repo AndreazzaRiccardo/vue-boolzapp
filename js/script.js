@@ -181,6 +181,11 @@ createApp({
             searchText: ""
         }
     },
+    created() {
+        this.contacts.forEach(elem => {
+            localStorage.setItem(elem.name, elem.messages[elem.messages.length - 1].date)
+        })
+    },
     methods: {
 
         // Legge sempre l'ultimo valore di un array
@@ -210,7 +215,7 @@ createApp({
 
         // Ricevi un messaggio autogenerato
         receivedMess(array) {
-            let answers = ["va bene", "a domani", "ne parliamo dopo", "ok", "sto arrivando"];
+            const answers = ["va bene", "a domani", "ne parliamo dopo", "ok", "sto arrivando"];
             let tempMessage = {
                 date: this.dataNow,
                 message: answers[this.generateRndNumber(5)],
@@ -234,12 +239,16 @@ createApp({
             let search = this.searchText.toLowerCase();
             this.contacts.forEach(elem => {
                 elem.visible = false;
-                if(elem.name.toLowerCase().includes(search))
+                if(elem.name.toLowerCase().includes(search)){
                 elem.visible = true;
+                }
             })
         },
         generateRndNumber(max) {
-            return Math.floor(Math.random() * max)
+            return Math.floor(Math.random() * max);
         },
+        lastAccess(user) {
+            return localStorage.getItem(user.name);
+        }
     }
 }).mount("#wrapper");

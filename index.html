@@ -85,14 +85,12 @@
                             <div class="img-chat">
                                 <img :src="`img/avatar${object.avatar}.jpg`" :alt="`Avatar ${object.name}`">
                             </div>
-                            <div class="chat-card">
+                            <div class="chat-card" :class="{'empty': object.messages.length === 0}">
                                 <div>
                                     <h3>{{ object.name }}</h3>
                                     <p  v-if="object.messages.length !== 0" class="last-message">{{ readLastValueMessage(object).message }}</p>
-                                    <p v-else></p>
                                 </div>
-                                <p v-if="object.messages.length !== 0">{{ readLastValueMessage(object).date }}</p>
-                                <p v-else></p>
+                                <p>{{ lastAccess(object) }}</p>
                             </div>
 
                         </li>
@@ -114,8 +112,7 @@
                         <img :src="`img/avatar${contacts[selectIndex].avatar}.jpg`" :alt="`Avatar ${contacts[selectIndex].name}` ">
                         <div>
                             <h3>{{ contacts[selectIndex].name }}</h3>
-                            <p v-if="contacts[selectIndex].messages.length !== 0">Ultimo accesso: {{ readLastValueMessage(contacts[selectIndex]).date }}</p>
-                            <p v-else></p>
+                            <p>Ultimo accesso: {{ lastAccess(contacts[selectIndex]) }}</p>
                         </div>
                     </div>
 
