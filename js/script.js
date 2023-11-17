@@ -224,10 +224,10 @@ createApp({
         },
 
         // Cancella un elemento di un'array
-        clearMessage(array, index, startArray) {
+        clearMessage(array, index) {
             array.splice(index, 1);
             if(array.length === 0) {
-                startArray.splice(this.selectIndex, 1);
+                this.contacts.splice(this.selectIndex, 1);
             }
         },
 

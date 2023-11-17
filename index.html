@@ -134,29 +134,27 @@
 
                     <!-- Chat box -->
                     <div class="chat-box" >
-                        <div class="message-container" v-for="(object, i) in contacts" :key="object.name" v-show="i === selectIndex">
-
-                            <div :class="friend.status === 'received' ? 'received' : 'sent'" v-for="(friend, j) in object.messages" :key="j">
-                                <div class="message">
+                        <div class="message-container" v-for="(messagesUser, index) in contacts[selectIndex].messages">
+                      
+                                <div class="message" :class="messagesUser.status === 'received' ? 'received' : 'sent'">
                                     <div class="text-message">
-                                        <p>{{ friend.message }}</p>
+                                        <p>{{ messagesUser.message }}</p>
                                     </div>
                                     <div class="menu-message">
                                         <div class="trigger">
                                             <i class="fa-solid fa-angle-down"></i>
-                                            <div class="message-option" :class="friend.status === 'received' ? 'received' : 'sent'">
+                                            <div class="message-option" :class="messagesUser.status === 'received' ? 'received' : 'sent'">
                                                 <button>
                                                     Info messaggio
                                                 </button>
-                                                <button @click="clearMessage(object.messages, j, contacts)">
+                                                <button @click="clearMessage(contacts[selectIndex].messages, index)">
                                                     Cancella messaggio
                                                 </button>
                                             </div>
                                         </div>
-                                        <p>{{ onlyHour(friend.date) }}</p>
+                                        <p>{{ onlyHour(messagesUser.date) }}</p>
                                     </div>
                                 </div>
-                            </div>
 
                         </div>
                     </div>
