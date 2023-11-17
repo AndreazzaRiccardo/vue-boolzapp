@@ -1,11 +1,6 @@
 const { createApp } = Vue;
 const dt = luxon.DateTime;
 
-const dataNow = dt.now().setLocale('it').toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS);
-
-console.log(dataNow);
-
-
 let contacts = [
     {
     name: 'Michele',
@@ -177,14 +172,11 @@ createApp({
             contacts,
             selectIndex: 0,
             newMessage: "",
-            dataNow,
             searchText: ""
         }
     },
     created() {
-        this.contacts.forEach(elem => {
-            localStorage.setItem(elem.name, elem.messages[elem.messages.length - 1].date)
-        })
+        this.refreshLastAccess()
     },
     methods: {
 
@@ -202,13 +194,15 @@ createApp({
         // Invia un messaggio
         sendMessage(array) {
             let tempMessage = {
-                date: this.dataNow,
+                date: this.dataNow(),
                 message: this.newMessage.trim(),
                 status: 'sent'
             };
             if(tempMessage.message !== ""){
             array.push(tempMessage);
-            setTimeout(() => this.receivedMess(array), 2000);
+            this.audioSend()
+            this.isWriting(this.contacts[this.selectIndex].messages);
+            setTimeout(() => this.receivedMess(array), 3000);
             }
             this.newMessage = "";
         },
@@ -217,11 +211,13 @@ createApp({
         receivedMess(array) {
             const answers = ["va bene", "a domani", "ne parliamo dopo", "ok", "sto arrivando"];
             let tempMessage = {
-                date: this.dataNow,
+                date: this.dataNow(),
                 message: answers[this.generateRndNumber(5)],
                 status: 'received'
             };
             array.push(tempMessage);
+            this.audioReceived();
+            this.refreshLastAccess();
         },
 
         // Mostra solo ore e minuti
@@ -244,11 +240,50 @@ createApp({
                 }
             })
         },
+
+        // Genera un numero casuale da zero a max
         generateRndNumber(max) {
             return Math.floor(Math.random() * max);
         },
+
+        // Ritorna gli ultimi accessi di ogni utente
         lastAccess(user) {
             return localStorage.getItem(user.name);
+        },
+
+        // Crea l'illusione di attesa nella ricezione di un messaggio
+        isWriting(array) {
+            let tempMessage = {
+                date: "",
+                message: "Sta scrivendo...",
+                status: 'received'
+            };
+            array.push(tempMessage);
+            setTimeout(() => this.contacts[this.selectIndex].messages.pop(), 3000);
+        },
+
+        // Audio di messaggio ricevuto
+        audioReceived() {
+            const receAudio = new Audio('audio/received.wav');
+            return receAudio.play();
+        },
+
+        // Audio di messaggio inviato
+        audioSend() {
+            const sentAudio = new Audio('audio/sent.wav');
+            return sentAudio.play();
+        },
+
+        // Determina l'ora esatta ogni volta che viene lanciata
+        dataNow() {
+            return dt.now().setLocale('it').toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS);
+        },
+
+        // Esegue il refresh degli ultimi accessi di tutte le chat aperte
+        refreshLastAccess() {
+            this.contacts.forEach(elem => {
+                localStorage.setItem(elem.name, elem.messages[elem.messages.length - 1].date);
+            })
         }
     }
 }).mount("#wrapper");

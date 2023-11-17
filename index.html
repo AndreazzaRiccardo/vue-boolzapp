@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#" />
 
     <title>Boolzapp</title>
 
@@ -80,12 +81,12 @@
                     <!-- Contact list -->
                     <ul>
 
-                        <li class="card"  v-for="(object, index) in contacts" @click="showThisChat(index)" :key="object.name" v-show="object.visible">
+                        <li class="card"  v-for="(object, index) in contacts" @click="showThisChat(index)" :key="object.name" v-show="object.visible" :class="{'active-chat' : index === selectIndex}">
 
                             <div class="img-chat">
                                 <img :src="`img/avatar${object.avatar}.jpg`" :alt="`Avatar ${object.name}`">
                             </div>
-                            <div class="chat-card" :class="{'empty': object.messages.length === 0}">
+                            <div class="chat-card">
                                 <div>
                                     <h3>{{ object.name }}</h3>
                                     <p  v-if="object.messages.length !== 0" class="last-message">{{ readLastValueMessage(object).message }}</p>
@@ -140,7 +141,7 @@
                                     <div class="text-message">
                                         <p>{{ messagesUser.message }}</p>
                                     </div>
-                                    <div class="menu-message">
+                                    <div class="menu-message" v-if="messagesUser.message !== 'Sta scrivendo...'">
                                         <div class="trigger">
                                             <i class="fa-solid fa-angle-down"></i>
                                             <div class="message-option" :class="messagesUser.status === 'received' ? 'received' : 'sent'">

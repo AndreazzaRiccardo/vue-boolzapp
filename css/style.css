@@ -176,6 +176,11 @@
             font-size: 95%;
         }
 
+        .active-chat {
+            border: 2px solid var(--light-blue);
+            filter: brightness(80%);
+        }
+
         li:hover {
             filter: brightness(80%);
         }
@@ -185,10 +190,6 @@
             height: 48px;
             display: flex;
             flex-direction: column;
-        }
-
-        .empty {
-            justify-content: end;
         }
 
         .chat-card p {
