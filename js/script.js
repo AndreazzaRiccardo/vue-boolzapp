@@ -165,13 +165,19 @@ let contacts = [
     }
 ];
 
+const myEmoji = ["✌","😂","😝","😁","😱","👉","🙌","🍻","🔥","🌈","☀","🎈","🌹","💄","🎀","⚽","🎾","🏁","😡","👿","🐻","🐶","🐬","🐟","🍀","👀","🚗","🍎","💝","💙","👌","❤","😍","😉","😓","😳","💪","💩","🍸","🔑","💖","🌟","🎉","🌺","🎶","👠","⚾","🏆","👽","💀","🐵","🐮","🐩","🐎","💣","👃","👂","🍓","💘","💜","👊","💋","😘","😜","😵","🙏","👋","🚽","💃","💎","🚀","🌙","🎁","⛄","🌊","⛵","🏀","💰","👶","👸","🐰","🐷","🐍","🐫","🔫","👄","🚲","🍉","💛","💚"];
+
+
+console.log(myEmoji.length);
 createApp({
     data () {
         return {
             contacts,
             selectIndex: 0,
             newMessage: "",
-            searchText: ""
+            searchText: "",
+            myEmoji,
+            emojiVisible: false,
         }
     },
     created() {
@@ -208,7 +214,7 @@ createApp({
 
         // Ricevi un messaggio autogenerato
         receivedMess(array) {
-            const answers = ["va bene", "a domani", "ne parliamo dopo", "ok", "sto arrivando"];
+            const answers = ["va bene", "certo!!", "ne parliamo dopo", "ok", "tra poco"];
             let tempMessage = {
                 date: this.dataNow(),
                 message: answers[this.generateRndNumber(5)],
@@ -300,6 +306,11 @@ createApp({
                     this.contacts[this.selectIndex].messages.splice(i, 1);
                 }
             })
+        },
+
+        // Inserisce un'emoji nell'input di testo
+        insertEmoji(emoji) {
+            document.getElementById("input-text-message").value += emoji
         }
     }
 }).mount("#wrapper");

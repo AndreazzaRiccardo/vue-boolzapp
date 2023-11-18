@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Rimuove l'errore favIcon -->
     <link rel="shortcut icon" href="#" />
 
     <title>Boolzapp</title>
@@ -158,13 +160,18 @@
                                 </div>
 
                         </div>
+
+                        <div class="emoji-box" v-show="emojiVisible">
+                            <div class="emoji-cont" v-for="(emoji, index) in myEmoji" :key="emoji" @click="insertEmoji(emoji)">{{ emoji }}</div>
+                        </div>
+
                     </div>
                     <!-- /Chat box -->
 
                     <!-- Message input -->
                     <div class="message-input">
 
-                        <button>
+                        <button @click="emojiVisible = !emojiVisible">
                             <i class="fa-regular fa-face-smile"></i>
                         </button>
                         <label for="input-text-message" class="text-send">
