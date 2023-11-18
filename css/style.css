@@ -241,7 +241,6 @@
             height:calc(100% - 110px);
             background-image: url(../img/mine.jpg);
             overflow-y: scroll;
-            position: relative;
         }
 
         .emoji-box {
@@ -249,10 +248,10 @@
             flex-wrap: wrap;
             width: 40%;
             position: absolute;
-            bottom: 0;
-            left: 0;
+            bottom: 115px;
+            left: 8px;
             border-radius: 5px;
-            border: 1px solid rgb(230, 230, 230);;
+            border: 1px solid rgb(230, 230, 230);
         }
 
         .emoji-cont {
@@ -283,6 +282,7 @@
             justify-content: space-between;
             padding: 1rem 2rem;
             gap: 3rem;
+            position: relative;
         }
 
         .sent {

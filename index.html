@@ -161,23 +161,23 @@
 
                         </div>
 
-                        <div class="emoji-box" v-show="emojiVisible">
-                            <div class="emoji-cont" v-for="(emoji, index) in myEmoji" :key="emoji" @click="insertEmoji(emoji)">{{ emoji }}</div>
-                        </div>
-
                     </div>
                     <!-- /Chat box -->
 
                     <!-- Message input -->
                     <div class="message-input">
+                        
+                        <div class="emoji-box" v-show="emojiVisible">
+                            <div class="emoji-cont" v-for="(emoji, index) in myEmoji" :key="emoji" @click="insertEmoji(emoji)">{{ emoji }}</div>
+                        </div>
 
                         <button @click="emojiVisible = !emojiVisible">
                             <i class="fa-regular fa-face-smile"></i>
                         </button>
                         <label for="input-text-message" class="text-send">
-                            <input id="input-text-message" type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage(contacts[selectIndex].messages)">
+                            <input id="input-text-message" type="text" placeholder="Scrivi un messaggio" v-model="textInputValue" @keyup.enter="sendMessage(contacts[selectIndex].messages)">
                         </label>
-                        <button class="microphone" v-if="newMessage === ''">
+                        <button class="microphone" v-if="textInputValue === ''">
                             <i class="fa-solid fa-microphone"></i>
                         </button>
                         <button v-else class="send" @click="sendMessage(contacts[selectIndex].messages)">

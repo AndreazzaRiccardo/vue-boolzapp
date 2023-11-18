@@ -167,17 +167,17 @@ let contacts = [
 
 const myEmoji = ["✌","😂","😝","😁","😱","👉","🙌","🍻","🔥","🌈","☀","🎈","🌹","💄","🎀","⚽","🎾","🏁","😡","👿","🐻","🐶","🐬","🐟","🍀","👀","🚗","🍎","💝","💙","👌","❤","😍","😉","😓","😳","💪","💩","🍸","🔑","💖","🌟","🎉","🌺","🎶","👠","⚾","🏆","👽","💀","🐵","🐮","🐩","🐎","💣","👃","👂","🍓","💘","💜","👊","💋","😘","😜","😵","🙏","👋","🚽","💃","💎","🚀","🌙","🎁","⛄","🌊","⛵","🏀","💰","👶","👸","🐰","🐷","🐍","🐫","🔫","👄","🚲","🍉","💛","💚"];
 
+const textInputValue = document.getElementById("input-text-message").value;
 
-console.log(myEmoji.length);
 createApp({
     data () {
         return {
             contacts,
             selectIndex: 0,
-            newMessage: "",
             searchText: "",
             myEmoji,
             emojiVisible: false,
+            textInputValue
         }
     },
     created() {
@@ -200,16 +200,16 @@ createApp({
         sendMessage(array) {
             let tempMessage = {
                 date: this.dataNow(),
-                message: this.newMessage.trim(),
+                message: this.textInputValue.trim(),
                 status: 'sent'
             };
-            if(tempMessage.message !== ""){
+           if(this.textInputValue.trim() !== ""){
             array.push(tempMessage);
             this.audioSend()
             this.isWriting(this.contacts[this.selectIndex].messages);
             setTimeout(() => this.receivedMess(array), 3000);
             }
-            this.newMessage = "";
+            this.textInputValue = "";
         },
 
         // Ricevi un messaggio autogenerato
@@ -287,7 +287,7 @@ createApp({
             return sentAudio.play();
         },
 
-        // Determina l'ora esatta ogni volta che viene lanciata
+        // Determina l'ora esatta ogni volta che viene invocata
         dataNow() {
             return dt.now().setLocale('it').toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS);
         },
@@ -310,7 +310,11 @@ createApp({
 
         // Inserisce un'emoji nell'input di testo
         insertEmoji(emoji) {
-            document.getElementById("input-text-message").value += emoji
-        }
+            document.getElementById("input-text-message").value += emoji;
+            this.textInputValue += emoji;
+            this.emojiVisible = false;
+            document.getElementById("input-text-message").focus();
+        },
+
     }
 }).mount("#wrapper");
