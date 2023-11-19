@@ -179,11 +179,11 @@
 
         .active-chat {
             border: 2px solid var(--light-blue);
-            filter: brightness(80%);
+            filter: brightness(90%);
         }
 
         li:hover {
-            filter: brightness(80%);
+            filter: brightness(90%);
         }
 
         .chat-card {
@@ -248,7 +248,7 @@
 
         /* Animazione */
 
-            .stretch {
+            .open-bar {
                 animation: open-bar 0.25s linear both;
             }
 
