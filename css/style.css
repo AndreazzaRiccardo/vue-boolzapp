@@ -432,6 +432,7 @@
 
         .message-option.sent {
             right: 10%;
+            background-color: white;
         }
 
         .message-option.received {

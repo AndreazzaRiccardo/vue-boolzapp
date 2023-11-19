@@ -78,6 +78,10 @@
         background-color: var(--light-grey);
     }
 
+    .message-option.sent {
+        background-color: var(--light-grey);
+    }
+
     .message-option button {
         color: white;
     }
