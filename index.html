@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +37,7 @@
         <div class="container">
 
             <!-- Left box -->
-            <div class="left-box">
+            <div class="left-box" @click="closeEmoji">
 
                 <header>
 
@@ -109,7 +109,7 @@
             <!-- Right box -->
             <div class="right-box">
 
-                <header class="right-header card">
+                <header class="right-header card" @click="closeEmoji">
 
                     <div class="last-access">
                         <img :src="`img/avatar${contacts[selectIndex].avatar}.jpg`" :alt="`Avatar ${contacts[selectIndex].name}` ">
@@ -136,7 +136,7 @@
                 <main>
 
                     <!-- Chat box -->
-                    <div class="chat-box">
+                    <div class="chat-box" @click="closeEmoji">
                         <div class="message-container" v-for="(messagesUser, index) in contacts[selectIndex].messages" :key="messagesUser.date">
                       
                                 <div class="message"  :class="messagesUser.status === 'received' ? 'received' : 'sent'">
@@ -160,7 +160,6 @@
                                 </div>
 
                         </div>
-
                     </div>
                     <!-- /Chat box -->
 

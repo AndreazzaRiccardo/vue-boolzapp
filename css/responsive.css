@@ -149,6 +149,10 @@
     .right-box main {
         height:calc(100% - 118px);
     }
+
+    .emoji-cont {
+        font-size: 1.3rem;
+    }
 }
 
 
@@ -198,4 +202,14 @@
     .last-access div {
         margin-top: 1rem;
     }
+
+    .emoji-cont {
+        font-size: 1rem;
+    }
 }
+
+
+
+
+
+

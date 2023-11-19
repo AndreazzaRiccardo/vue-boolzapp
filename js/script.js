@@ -210,6 +210,7 @@ createApp({
             setTimeout(() => this.receivedMess(array), 3000);
             }
             this.textInputValue = "";
+            this.closeEmoji();
         },
 
         // Ricevi un messaggio autogenerato
@@ -312,8 +313,12 @@ createApp({
         insertEmoji(emoji) {
             document.getElementById("input-text-message").value += emoji;
             this.textInputValue += emoji;
-            this.emojiVisible = false;
             document.getElementById("input-text-message").focus();
+        },
+
+        // Chiude la finestra emoji cliccando in un determinato punto
+        closeEmoji() {
+            this.emojiVisible = false;
         },
 
     }
