@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" data-theme="light">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,12 +60,14 @@
                     </div>
 
                     <div class="notice card">
-                        <div class="bell">
-                            <i class="fa-solid fa-bell-slash"></i>
+                        <div class="bell" @click="notice = !notice">
+                            <i class="fa-solid fa-bell" v-if="notice"></i>
+                            <i class="fa-solid fa-bell-slash" v-else></i>
                         </div>
                         <div class="text-notice">
-                            <h3>Ricevi notifiche di nuovi messaggi</h3>
-                            <a href="">Attiva notifiche desktop</a>
+                            <h3 v-if="notice">Le notifiche sono attive</h3>
+                            <h3 v-else>Ricevi notifiche di nuovi messaggi</h3>
+                            <a href="" v-if="!notice">Attiva notifiche desktop</a>
                         </div>
                     </div>
 
@@ -109,7 +111,7 @@
             <!-- Right box -->
             <div class="right-box">
 
-                <header class="right-header card" @click="closeEmoji">
+                <header class="right-header card">
 
                     <div class="last-access">
                         <img :src="`img/avatar${contacts[selectIndex].avatar}.jpg`" :alt="`Avatar ${contacts[selectIndex].name}` ">
@@ -120,7 +122,8 @@
                     </div>
 
                     <div class="btn-header-right">
-                        <button>
+                        <input type="text" class="header-search-input" placeholder="Cerca messaggio" v-show="searchChatVisible" v-model="searchChat" @keyup="searchInChat" :class="stretch === true ? 'stretch' : 'close-bar'" >
+                        <button @click="openSearchMess">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                         <button>
@@ -139,7 +142,7 @@
                     <div class="chat-box" @click="closeEmoji">
                         <div class="message-container" v-for="(messagesUser, index) in contacts[selectIndex].messages" :key="messagesUser.date">
                       
-                                <div class="message"  :class="messagesUser.status === 'received' ? 'received' : 'sent'">
+                                <div class="message"  :class="messagesUser.status === 'received' ? 'received' : 'sent'" v-show="messagesUser.visible">
                                     <div class="text-message">
                                         <p>{{ messagesUser.message }}</p>
                                     </div>

@@ -114,6 +114,7 @@
             justify-content: center;
             align-items: center;
             aspect-ratio: 1/1;
+            cursor: pointer;
         }
 
         .bell i {
@@ -230,6 +231,77 @@
             color: var(--text-color);
             line-height: 2rem;
         }
+
+        .btn-header-right {
+            display: flex;
+            gap: .5rem;
+            justify-content: flex-end;
+        }
+
+        .header-search-input {
+            border-radius: 7px;
+            padding: .2rem;
+            width: 0px;
+            outline: none;
+            border: 1px solid var(--btn-color);
+        }
+
+        /* Animazione */
+
+            .stretch {
+                animation: open-bar 0.25s linear both;
+            }
+
+            .close-bar {
+                animation: close-bar 0.25s reverse both;
+            }
+
+            @keyframes close-bar {
+
+                5% {
+                    width: 0px;
+                    }
+                
+                    40% {
+                        width: 75px;
+                    }
+                
+                    60% {
+                        width: 150px;
+                    }
+                
+                    80% {
+                        width: 225px;
+                    }
+    
+                    100% {
+                        width: 300px;
+                    }
+            }
+
+            @keyframes open-bar {
+                
+                5% {
+                width: 0px;
+                }
+            
+                40% {
+                    width: 75px;
+                }
+            
+                60% {
+                    width: 150px;
+                }
+            
+                80% {
+                    width: 225px;
+                }
+
+                100% {
+                    width: 300px;
+                }
+            }
+
 
     /* Main */
 
