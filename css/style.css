@@ -27,7 +27,7 @@
     }
 
     #wrapper {
-        height: 100vh;
+        height: 100dvh;
         width: 100%;
         background: linear-gradient(#009688 15%, #DADBD4 15%);
         display: flex;

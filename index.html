@@ -60,14 +60,14 @@
                     </div>
 
                     <div class="notice card">
-                        <div class="bell" @click="notice = !notice">
-                            <i class="fa-solid fa-bell" v-if="notice"></i>
+                        <div class="bell" @click="visible.notice = !visible.notice">
+                            <i class="fa-solid fa-bell" v-if="visible.notice"></i>
                             <i class="fa-solid fa-bell-slash" v-else></i>
                         </div>
-                        <div class="text-notice">
-                            <h3 v-if="notice">Le notifiche sono attive</h3>
+                        <div class="text-visible.notice">
+                            <h3 v-if="visible.notice">Le notifiche sono attive</h3>
                             <h3 v-else>Ricevi notifiche di nuovi messaggi</h3>
-                            <a href="" v-if="!notice">Attiva notifiche desktop</a>
+                            <a href="" v-if="!visible.notice">Attiva notifiche desktop</a>
                         </div>
                     </div>
 
@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="btn-header-right">
-                        <input type="text" id="searchBar-mex" class="header-search-input" placeholder="Cerca messaggio" v-show="searchChatVisible" v-model="searchChat" @keyup="searchInChat" :class="stretch === true ? 'open-bar' : 'close-bar'">
+                        <input type="text" id="searchBar-mex" class="header-search-input" placeholder="Cerca messaggio" v-show="visible.searchChat" v-model="searchChat" @keyup="searchInChat" :class="visible.searchMex === true ? 'open-bar' : 'close-bar'">
                         <label for="searchBar-mex">
                             <button @click="openSearchMess">
                                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -171,11 +171,11 @@
                     <!-- Message input -->
                     <div class="message-input">
                         
-                        <div class="emoji-box" v-show="emojiVisible">
+                        <div class="emoji-box" v-show="visible.emoji">
                             <div class="emoji-cont" v-for="(emoji, index) in myEmoji" :key="emoji" @click="insertEmoji(emoji)">{{ emoji }}</div>
                         </div>
 
-                        <button @click="emojiVisible = !emojiVisible">
+                        <button @click="visible.emoji = !visible.emoji">
                             <i class="fa-regular fa-face-smile"></i>
                         </button>
                         <label for="input-text-message" class="text-send">

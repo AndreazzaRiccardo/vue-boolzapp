@@ -194,15 +194,17 @@ createApp({
     data () {
         return {
             contacts,
+            textInputValue,
+            myEmoji,
             selectIndex: 0,
             searchText: "",
-            myEmoji,
-            emojiVisible: false,
-            textInputValue,
-            searchChatVisible: false,
             searchChat: "",
-            notice: false,
-            stretch: false
+            visible: {
+                emoji: false,
+                searchChat: false,
+                notice: false,
+                searchMex: false
+            }
         }
     },
     created() {
@@ -220,7 +222,7 @@ createApp({
         showThisChat(index) {
             this.selectIndex = index;
             this.searchChat = "";
-            this.searchChatVisible = false;
+            this.visible.searchChat = false;
         },
 
         // Invia un messaggio
@@ -309,7 +311,7 @@ createApp({
         // Audio di messaggio ricevuto
         audioReceived() {
             const receAudio = new Audio('audio/received.wav');
-            if (this.notice){
+            if (this.visible.notice){
                 return receAudio.play();
             }
         },
@@ -317,7 +319,7 @@ createApp({
         // Audio di messaggio inviato
         audioSend() {
             const sentAudio = new Audio('audio/sent.wav');
-            if (this.notice){
+            if (this.visible.notice){
                 return sentAudio.play();
             }
         },
@@ -352,9 +354,9 @@ createApp({
 
         // Chiude la finestra emoji e di ricerca cliccando in un determinato punto
         closeEmoji() {
-            this.emojiVisible = false;
-            this.searchChatVisible = false;
-            this.stretch = false;
+            this.visible.emoji = false;
+            this.visible.searchChat = false;
+            this.visible.searchMex = false;
             if(this.searchChat != ""){
                 this.contacts[this.selectIndex].messages.forEach(elem => {
                     elem.visible = true;
@@ -376,13 +378,13 @@ createApp({
 
         // Apre la barra di ricerca delle chat con animazione
         openSearchMess() {
-            if(this.searchChatVisible === false) {
-                this.stretch = true;
-                this.searchChatVisible = true;
+            if(this.visible.searchChat === false) {
+                this.visible.searchMex = true;
+                this.visible.searchChat = true;
             } else {
-                this.stretch = false;
+                this.visible.searchMex = false;
                 setTimeout(() => {
-                    this.searchChatVisible = false;
+                    this.visible.searchChat = false;
                 },230);
             }
         }
