@@ -249,14 +249,14 @@
         /* Animazione */
 
             .open-bar {
-                animation: open-bar 0.25s linear both;
+                animation: open 0.25s linear both;
             }
 
             .close-bar {
-                animation: close-bar 0.25s reverse both;
+                animation: close 0.25s reverse both;
             }
 
-            @keyframes close-bar {
+            @keyframes close {
 
                 5% {
                     width: 0px;
@@ -279,7 +279,7 @@
                     }
             }
 
-            @keyframes open-bar {
+            @keyframes open {
                 
                 5% {
                 width: 0px;

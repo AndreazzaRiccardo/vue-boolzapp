@@ -122,10 +122,12 @@
                     </div>
 
                     <div class="btn-header-right">
-                        <input type="text" class="header-search-input" placeholder="Cerca messaggio" v-show="searchChatVisible" v-model="searchChat" @keyup="searchInChat" :class="stretch === true ? 'open-bar' : 'close-bar'" >
-                        <button @click="openSearchMess">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
+                        <input type="text" id="searchBar-mex" class="header-search-input" placeholder="Cerca messaggio" v-show="searchChatVisible" v-model="searchChat" @keyup="searchInChat" :class="stretch === true ? 'open-bar' : 'close-bar'">
+                        <label for="searchBar-mex">
+                            <button @click="openSearchMess">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </label>
                         <button>
                             <i class="fa-solid fa-paperclip"></i>
                         </button>
